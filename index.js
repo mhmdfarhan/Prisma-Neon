@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 app.use('/api/posts', postsRouter); // use route posts di Express
 app.use('/api/auth', authRouter); // use route posts di Express
-// app.use('/api/verifyToken', verifyToken); // use route posts di Express
+app.use('/api/verifyToken', verifyToken); // use route posts di Express
 
 app.get("/", async (req, res) => {
   res.send("welcome on in.");

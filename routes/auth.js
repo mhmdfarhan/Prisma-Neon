@@ -114,8 +114,14 @@ router.post('/register', async (req, res) => {
 
 router.get('/curr-user',verifyToken, async(req, res) => {
     if (req.user) {
-        const result = await client.query('SELECT name,id,email,code,role_user FROM users WHERE id = $1', [req.user.id]);
-        res.json({ user: result.rows[0] });
+        const result = await client.user.findMany({
+            where:{
+                id:{
+                    equals:req.user.id
+                }
+            }
+        });
+        res.json({ user: result });
     } else {
         res.status(401).json({ message: 'Unauthorized' });
     }
